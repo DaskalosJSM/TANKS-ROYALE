@@ -28,7 +28,7 @@ public bool second;
         this.transform.position=new Vector3( 3*canvasWidth/4+offsetX,canvasHeight/2+offsetY,0);
         }
         else{
-        this.transform.position=new Vector3( canvasWidth/4+offsetX,canvasHeight/2+offsetY,0);
+        this.transform.position=new Vector3( canvasWidth/2+offsetX,canvasHeight/2+offsetY,0);
 
         }
     }

@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour
     float coutdown;
     public float speed = 20f;
     public Rigidbody rb ;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +24,19 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }   
     }
-    void OnCollisionEnter(Collision other) 
+    void OnCollisionEnter(Collision collision) 
     {
-       rb.velocity = speed * -(transform.forward);
+        // Obtener la normal de la superficie de colisión
+        Vector3 normal = collision.contacts[0].normal;
+
+        // Calcular la dirección reflejada
+        Vector3 reflectDir = Vector3.Reflect(rb.velocity.normalized, normal);
+
+        // Ajustar la velocidad del proyectil
+        rb.velocity = reflectDir * speed;
+
+        // Ajustar la rotación del proyectil para que mire en la dirección del nuevo vector
+        Quaternion targetRotation = Quaternion.LookRotation(reflectDir);
+        rb.rotation = targetRotation;
     }
 }
